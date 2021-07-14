@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div>
+        <label>NAME</label>
+        <input type="text" name="" id="productName">
+    </div>
+    <div>
+        <label>CategoryId</label>
+        <input type="text" name="" id="categoryid">
+    </div>
+    <div>
+        <label>UNITPRICE</label>
+        <input type="text" name="" id="productPrice">
+    </div>
+    <div>
+        <label>SUPPLIERID</label>
+        <input type="text" name="" id="supplierId">
+    </div>
+    <div>
+        <label>QUANTITYPERUNIT</label>
+        <input type="text" name="" id="quantityperunit">
+    </div>
+
+    <div>
+        <button onclick="add()">Add</button>
+    </div>
+</body>
+</html>
+
+<script>
+
+function add(){
+
+    let productName =document.getElementById("productName").value;
+    let productId= document.getElementById("categoryid").value;
+    let productPrice =document.getElementById("productPrice").value;
+    let supplierId= document.getElementById("supplierId").value;
+    let quantityperunit =document.getElementById("quantityperunit").value;
+    
+
+    let newProduct={
+        name:productName,
+        categoryId:categoryid,
+        unitPrice:productPrice,
+        supplierId:supplierId,
+        quantityPerUnit:quantityperunit
+
+    };
+
+
+
+    let requestOptions = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            //js objesini json a çevirir
+            body: JSON.stringify(newProduct)
+        }
+
+
+        fetch('https://northwind.vercel.app/api/products', requestOptions)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+}
+
+
+</script>

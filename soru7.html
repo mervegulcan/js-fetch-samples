@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="suppliers">
+
+
+    </ul>
+    
+    <button onclick="getData()">Dataları  getir</button>
+</body>
+</html>
+
+<script>
+function getData() {
+
+   
+//fetch default get isteği yapar
+fetch('https://northwind.vercel.app/api/suppliers')
+    .then((res) => res.json())
+    .then((data) => {
+ 
+        let ndata = data.slice(0,5);
+        ndata.map((item) => {
+            
+            let newli = document.createElement('li');
+            newli.innerHTML = item.companyName
+            document.getElementById('suppliers').append(newli);
+            
+           
+        });
+
+    
+    })
+
+
+}
+
+</script>

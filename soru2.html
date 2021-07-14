@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+   table,
+        td,
+        tr,
+        th {
+            border: 1 px solid;
+            border-color:  black;
+            border-collapse: collapse;
+            border-style:solid;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button id="veriOku"> tıkla</button>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>UNITPRICE</th>
+                    </tr>
+                </thead>
+                <tbody id="liste">
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+
+ 
+    const btnCek =document.querySelector("#veriOku");
+    const tbListe =document.querySelector("#liste");
+    btnCek.addEventListener("click",function(){
+         fetch('https://northwind.vercel.app/api/categories')
+        .then(res => res.json())
+        .then(data => {
+            tbListe.innerHTML="";
+    
+            data.forEach(function(element,index)  {
+                const satir =document.createElement("tr");
+                const hucre1 =document.createElement("td"); 
+                const hucre2 =document.createElement("td");
+                const hucre3 =document.createElement("td");
+    
+                hucre1.textContent=element.id
+                hucre2.textContent=element.description
+                hucre3.textContent=element.name
+    
+                satir.appendChild(hucre1)
+                satir.appendChild(hucre2)
+                satir.appendChild(hucre3)
+    
+                tbListe.appendChild(satir)
+    
+                
+            });
+        });
+    });
+    
+    var cells =document.getElementsByTagName('td');
+
+    for(var i=0 ; i <= cells.length; i++){
+        cells[i].addEventListener('click',clickHandler);
+    }        
+    
+function clickHandler(){
+    document.getElementById("td").style.display="none";
+}
+    </script>
